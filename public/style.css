@@ -2,3 +2,8 @@
     background-color: rgb(104, 104, 240);
 
 }
+
+.routines,
+.activities {
+    border: solid black 2px;
+}
