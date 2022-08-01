@@ -18,7 +18,7 @@ const Activities = () =>{
         <div>
             {activity.map((activity, index) => {
                 return (
-                    <div key={index}>
+                    <div className="activities" key={index}>
                         <p>name: {activity.name}</p>
                         <p>description: {activity.description}</p>
                     </div>

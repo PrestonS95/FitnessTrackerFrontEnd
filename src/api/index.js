@@ -19,8 +19,8 @@ export async function getPublicRoutine() {
     try {
         const response = await fetch(`${URL}/routines`)
         const result = await response.json()
-        console.log(result, 'resultpublicroutines')  
-        return result      
+        console.log(result, 'resultpublicroutines')
+        return result        
     } catch (error) {
         throw(error)
     }
