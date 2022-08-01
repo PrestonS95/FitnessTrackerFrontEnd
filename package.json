@@ -1,0 +1,19 @@
+{
+  "name": "fitnesstrckfe",
+  "version": "1.0.0",
+  "description": "Front End client app to our Fitness Tracker project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PrestonS95/FitnessTrackerFrontEnd.git"
+  },
+  "author": "Dylan Kammerlohr and Preston Sullins",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PrestonS95/FitnessTrackerFrontEnd/issues"
+  },
+  "homepage": "https://github.com/PrestonS95/FitnessTrackerFrontEnd#readme"
+}
