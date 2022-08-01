@@ -1,25 +1,16 @@
 import { Routes, Route,} from "react-router-dom";
 import React, {useState, useEffect} from 'react';
-import {Activities} from "./";
+import {Activities, Navbar} from "./";
 
 
-
-
- function App() {
-
+function App() {
   return (
-   
+    <>
+    <Navbar />
       <Routes>
-       
-        <Route 
-          path="/"
-          element={
-            <Activities/>
-          }
-          />
-
+        <Route path="/" element={<Activities/>} />
       </Routes>
-    
+    </>
   );
 }
 

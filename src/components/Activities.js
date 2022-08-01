@@ -1,15 +1,29 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { getAllActivities } from "../api";
 
-//  const a = await getAllActivities()
-//         console.log(a)
 
 const Activities = () =>{
+    const [activity, setActivity] = useState([])
+   
+       const getActivities = async() => {
+        const activity = await getAllActivities()
+        console.log(activity, 'here')
+        setActivity(activity)
+    }
+    useEffect(() => {
+        getActivities() 
+    }, [])
     
-
     return(
         <div>
-            <h1>Hello world!</h1>
+            {activity.map((activity, index) => {
+                return (
+                    <div key={index}>
+                        <p>name: {activity.name}</p>
+                        <p>description: {activity.description}</p>
+                    </div>
+                )
+            })}
        </div>
 )}
 
