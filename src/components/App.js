@@ -9,6 +9,7 @@ function App() {
     <Navbar />
       <Routes>
         <Route path="/" element={<Activities/>} />
+        <Route path="/activities" element={<Activities/>} />
       </Routes>
     </>
   );
