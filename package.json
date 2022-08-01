@@ -1,12 +1,8 @@
 {
-<<<<<<< HEAD
   "name": "fitnesstrckfe",
   "version": "1.0.0",
   "description": "Front End client app to our Fitness Tracker project",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/PrestonS95/FitnessTrackerFrontEnd.git"
@@ -16,10 +12,8 @@
   "bugs": {
     "url": "https://github.com/PrestonS95/FitnessTrackerFrontEnd/issues"
   },
-  "homepage": "https://github.com/PrestonS95/FitnessTrackerFrontEnd#readme"
-=======
-  "name": "fitnesstrackerfe",
-  "version": "0.1.0",
+  "homepage": "https://github.com/PrestonS95/FitnessTrackerFrontEnd#readme",
+
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
@@ -54,5 +48,4 @@
       "last 1 safari version"
     ]
   }
->>>>>>> 74eea5b (Setup)
 }
