@@ -6,9 +6,9 @@ const Routines = () =>{
     const [routine, setRoutine] = useState([])
    
        const getRoutines = async() => {
-        const routine = await getPublicRoutine()
-        console.log(routine, 'here')
-        setRoutine(routine)
+        const routines = await getPublicRoutine()
+        console.log(routines, 'here')
+        setRoutine(routines)
     }
     useEffect(() => {
         getRoutines() 
@@ -18,11 +18,13 @@ const Routines = () =>{
         <div>
             {routine.map((routine, index) => {
                 return (
-                    <div key={index}>
-                        <p>name: {routine.name}</p>
-                        <p>description: {activity.description}</p>
-                    </div>
-                )
+                  <div key={index}>
+                    <p>name: {routine.creatorName}</p>
+                    <p>goal: {routine.goal}</p>
+                    <p>name: {routine.name}</p>
+                    <p>description: {routine.activities[1].description}</p>
+                  </div>
+                );
             })}
        </div>
 )}
