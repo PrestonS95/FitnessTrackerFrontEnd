@@ -15,3 +15,12 @@ export async function getAllActivities() {
 }
 console.log(getAllActivities())
 
+export async function getPublicRoutine() {
+    try {
+        const response = await fetch(`${URL}/routines`)
+        const result = await response.json()
+        console.log(result, 'resultpublicroutines')        
+    } catch (error) {
+        throw(error)
+    }
+}
