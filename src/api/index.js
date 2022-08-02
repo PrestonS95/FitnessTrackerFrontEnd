@@ -2,6 +2,73 @@ const BASE = `https://agile-basin-92861.herokuapp.com/api`;;
 export const URL = `${BASE}`;
 
 
+
+export const editRoutine = async(token, routineId) => {
+try{
+     const token = localStorage.getItem("token");
+     const newRoutineName = event.target[0].value;
+     const newRoutineGoal = event.target[1].value;
+     const newRoutinePublic = event.target[2].checked;
+     const response = await fetch(`${URL}/routines/${routineId}`,
+  {
+      method: "PATCH",
+      headers: {
+          'Content-Type': 'application/json',
+         'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        name: `${newRoutineName}`,
+        goal: `${newRoutineGoal}`,
+        isPublic: newRoutinePublic}),
+ })
+  const result = await response.json()
+  console.log(result, 'result ')
+  return result
+  }
+  catch(error){
+  throw(error)
+}
+}
+export const deletePost = async(token, routineId) => {
+  const response = await fetch(`${URL}/routines/${routineId}`, {
+    method: 'DELETE', 
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+  })
+  const result = await response.json()
+}
+
+export async function createRoutine(event){
+  const token = localStorage.getItem('token')
+  const newRoutineName = event.target[0].value
+  const newRoutineGoal = event.target[1].value
+  const newRoutinePublic = event.target[2].checked;
+  console.log(newRoutineName, newRoutineGoal, 'newroutinename api')
+  try{
+     const response = await fetch(`${URL}/routines`,
+  {
+      method: "POST",
+      headers: {
+          'Content-Type': 'application/json',
+         'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        name: `${newRoutineName}`,
+        goal: `${newRoutineGoal}`,
+        isPublic: newRoutinePublic}),
+ })
+  const result = await response.json()
+  console.log(result, 'result ')
+  return result
+  }
+  catch(error){
+  throw(error)
+  }
+}
+
+
 export async function getAllActivities() {
   try {
     const response = await fetch(`${URL}/activities`);
