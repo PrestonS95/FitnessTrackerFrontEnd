@@ -19,8 +19,30 @@ const MyRoutines = () => {
     getMyInfo();
   }, []);
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    newRoutine(event);
+  };
+
   return (
     <div>
+        <div>
+        <h3 id="create-routine-title">Create New Routine</h3>
+          <form onSubmit={handleSubmit} className="routineForm">
+            <input id="name" placeholder="Name" />
+            <input id="goal" placeholder="Goal" />
+            <button
+              id="new-routine-submit"
+              type="Submit"
+              onClick={() => {
+                window.location.reload(true);
+              }}
+            >
+              Create
+            </button>
+          </form>
+        </div>
+        <div>
         {routine.map((routine, index) => {
             return (
                 <div className="routines" key={index}>
@@ -41,6 +63,7 @@ const MyRoutines = () => {
                 </div>
             )
         })}
+        </div>
     </div>
   )
 
