@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getUser, getUserRoutines } from "../api";
+import { getUser, getUserRoutines, createRoutine, deletePost } from "../api";
 
 const MyRoutines = () => {
   const [routine, setRoutine] = useState([]);
+  const [checked, setChecked] = useState(false);
 
   let navigate = useNavigate();
   let token = localStorage.getItem("token");
@@ -19,9 +20,12 @@ const MyRoutines = () => {
     getMyInfo();
   }, []);
 
+  const handleChange = () => {
+    setChecked(!checked);
+  };
   const handleSubmit = async (event) => {
     event.preventDefault();
-    newRoutine(event);
+    createRoutine(event);
   };
 
   return (
@@ -31,6 +35,16 @@ const MyRoutines = () => {
           <form onSubmit={handleSubmit} className="routineForm">
             <input id="name" placeholder="Name" />
             <input id="goal" placeholder="Goal" />
+            <label>
+              Public?
+              <input
+                id="deliver"
+                type="checkbox"
+                checked={checked}
+                onChange={handleChange}
+                placeholder="Public"
+              />
+            </label>
             <button
               id="new-routine-submit"
               type="Submit"
@@ -44,6 +58,7 @@ const MyRoutines = () => {
         </div>
         <div>
         {routine.map((routine, index) => {
+          console.log(routine, 'routine in myRoutines')
             return (
                 <div className="routines" key={index}>
                     <p>name: {routine.name}</p>
@@ -60,6 +75,24 @@ const MyRoutines = () => {
                             </div>
                         )
                     })}
+                  <div>
+                     <button
+                      id="edit-routine-submit"
+                      type="button"
+                      onClick={() => {
+                        window.location.reload(true);
+                      }}>Edit Routine</button>
+                    <button
+                      id="delete-button"
+                      onClick={() => {
+                        const token = localStorage.getItem("token");
+                        deletePost(token, routine.id);
+                        window.location.reload(true)
+                      }}
+                    >
+                      Delete Post
+                    </button>
+                  </div>
                 </div>
             )
         })}
@@ -70,3 +103,4 @@ const MyRoutines = () => {
 }
 
 export default MyRoutines
+
