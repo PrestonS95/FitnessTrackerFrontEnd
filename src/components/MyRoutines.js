@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import AddActivities from "./AddActivities";
 import { getUser, getUserRoutines, createRoutine, deleteRoutine, editRoutine } from "../api";
 
 const MyRoutines = () => {
   const [routine, setRoutine] = useState([]);
   const [checked, setChecked] = useState(false);
   const [editMode, setEditMode] = useState(false)
+  const [activities, setActivities] = useState([])
+  const [addMode, setAddMode] = useState(false)
 
   let navigate = useNavigate();
   let token = localStorage.getItem("token");
@@ -83,7 +86,7 @@ const MyRoutines = () => {
                             </div>
                         )
                     })}
-                  <div>
+                  <div id='edit-button'>
                      <button
                       id="edit-routine-submit"
                       type="button"
@@ -116,7 +119,8 @@ const MyRoutines = () => {
                               </button>
                             </form>) 
                             : null}
-                        
+                        </div>
+                    <div id='delete-button'>
                     <button
                       id="delete-button"
                       onClick={() => {
@@ -128,7 +132,19 @@ const MyRoutines = () => {
                       Delete Post
                     </button>
                   </div>
-                </div>
+                  <div id='add-activity-button'>
+                    <button
+                      id="add-activity-submit"
+                      type="button"
+                      onClick={() => {
+                        setAddMode(true)
+                      }}>
+                        Add Activity</button>
+                        {addMode ? 
+                        (<AddActivities activities = {activities} setActivities = {setActivities}/>) 
+                            : null}
+                        </div>
+                    </div>
             )
         })}
         </div>
