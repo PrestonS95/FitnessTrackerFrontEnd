@@ -168,3 +168,27 @@ export async function getUserRoutines(username, token){
   // console.log(result, 'hi')
   return result
 }
+
+export async function AddActivityToRoutine(event, routineId){
+  const activityCount = event.target[0].value
+  const activityDuration = event.target[1].value
+  
+  console.log(event.target.selectedIndex, 'selectedIndex')
+  console.log(activityCount, 'activityCount') 
+  console.log(activityDuration, 'activityDuration') 
+  try {
+    const response = await fetch(`${URL}/api/routines/${routineId}/activties`, {
+      method: "POST",
+      body: JSON.stringify({
+        activityId: 7,
+        count: activityCount, 
+        duration: activityDuration
+      })
+    })
+    const result = await response.json()
+    console.log(result, 'result ')
+    return result
+  } catch (error){
+    throw error
+  }
+}

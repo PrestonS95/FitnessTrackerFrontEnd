@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import AddActivities from "./AddActivities";
 import { getUser, getUserRoutines, createRoutine, deleteRoutine, editRoutine } from "../api";
 
@@ -10,7 +9,6 @@ const MyRoutines = () => {
   const [activities, setActivities] = useState([])
   const [addMode, setAddMode] = useState(false)
 
-  let navigate = useNavigate();
   let token = localStorage.getItem("token");
 
   const getMyInfo = async () => {
