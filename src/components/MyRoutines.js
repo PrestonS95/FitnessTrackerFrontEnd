@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getUser, getUserRoutines, createRoutine, deletePost } from "../api";
+import { getUser, getUserRoutines, createRoutine, deleteRoutine, editRoutine } from "../api";
 
 const MyRoutines = () => {
   const [routine, setRoutine] = useState([]);
   const [checked, setChecked] = useState(false);
+  const [editMode, setEditMode] = useState(false)
 
   let navigate = useNavigate();
   let token = localStorage.getItem("token");
@@ -26,6 +27,13 @@ const MyRoutines = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     createRoutine(event);
+  };
+
+  const handleEdit = async (event) => {
+    event.preventDefault();
+    let routineId = event.target.id
+    await editRoutine(event, routineId);
+    window.location.reload(true);
   };
 
   return (
@@ -80,13 +88,40 @@ const MyRoutines = () => {
                       id="edit-routine-submit"
                       type="button"
                       onClick={() => {
-                        window.location.reload(true);
-                      }}>Edit Routine</button>
+                        setEditMode(true)
+                      }}>
+                        Edit Routine</button>
+                        {editMode ? 
+                        (<form id={`${routine.id}`} onSubmit={handleEdit} className="editRoutineForm">
+                              <input id="name" placeholder="Name" />
+                              <input id="goal" placeholder="Goal" />
+                              <label>
+                                Public?
+                                <input
+                                  id="deliver"
+                                  type="checkbox"
+                                  checked={checked}
+                                  onChange={handleChange}
+                                  placeholder="Public"
+                                />
+                              </label>
+                              <button
+                                id="edit-routine-submit"
+                                type="Submit"
+                                onClick={() => {
+                                  // window.location.reload(true);
+                                }}
+                              >
+                                Update
+                              </button>
+                            </form>) 
+                            : null}
+                        
                     <button
                       id="delete-button"
                       onClick={() => {
                         const token = localStorage.getItem("token");
-                        deletePost(token, routine.id);
+                        deleteRoutine(token, routine.id);
                         window.location.reload(true)
                       }}
                     >

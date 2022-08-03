@@ -3,14 +3,17 @@ export const URL = `${BASE}`;
 
 
 
-export const editRoutine = async(token, routineId) => {
+export const editRoutine = async(event, routineId) => {
 try{
      const token = localStorage.getItem("token");
      const newRoutineName = event.target[0].value;
+     console.log(newRoutineName, "newRoutineName")
      const newRoutineGoal = event.target[1].value;
+     console.log(newRoutineGoal, "newRoutineGoal")
      const newRoutinePublic = event.target[2].checked;
-     const response = await fetch(`${URL}/routines/${routineId}`,
-  {
+     console.log(newRoutinePublic, "newRoutinePublic")
+     console.log(routineId, 'routineid')
+     const response = await fetch(`${URL}/routines/${routineId}`, {
       method: "PATCH",
       headers: {
           'Content-Type': 'application/json',
@@ -21,6 +24,7 @@ try{
         goal: `${newRoutineGoal}`,
         isPublic: newRoutinePublic}),
  })
+  console.log(response, 'response')
   const result = await response.json()
   console.log(result, 'result ')
   return result
@@ -29,7 +33,7 @@ try{
   throw(error)
 }
 }
-export const deletePost = async(token, routineId) => {
+export const deleteRoutine = async(token, routineId) => {
   const response = await fetch(`${URL}/routines/${routineId}`, {
     method: 'DELETE', 
     headers: {
@@ -38,6 +42,8 @@ export const deletePost = async(token, routineId) => {
     },
   })
   const result = await response.json()
+  console.log(result)
+  return result
 }
 
 export async function createRoutine(event){
