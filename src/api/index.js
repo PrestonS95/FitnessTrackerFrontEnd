@@ -170,19 +170,26 @@ export async function getUserRoutines(username, token){
 }
 
 export async function AddActivityToRoutine(event, routineId){
+  const token = localStorage.getItem("token");
   const activityCount = event.target[0].value
   const activityDuration = event.target[1].value
+  const activityId = event.target.id
   
-  console.log(event.target.selectedIndex, 'selectedIndex')
+  console.log(activityId, 'activityId')
   console.log(activityCount, 'activityCount') 
   console.log(activityDuration, 'activityDuration') 
   try {
-    const response = await fetch(`${URL}/api/routines/${routineId}/activties`, {
+    console.log(routineId, 'routineId in api')
+    const response = await fetch(`${URL}/routines/${routineId}/activities`, {
       method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
       body: JSON.stringify({
-        activityId: 7,
-        count: activityCount, 
-        duration: activityDuration
+        activityId: `${activityId}`,
+        count: `${activityCount}`, 
+        duration: `${activityDuration}`
       })
     })
     const result = await response.json()

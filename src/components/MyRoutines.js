@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AddActivities from "./AddActivities";
-import { getUser, getUserRoutines, createRoutine, deleteRoutine, editRoutine } from "../api";
+import { getUser, getUserRoutines, createRoutine, deleteRoutine, editRoutine, AddActivityToRoutine, getAllActivities } from "../api";
 
 const MyRoutines = () => {
   const [routine, setRoutine] = useState([]);
@@ -8,12 +8,13 @@ const MyRoutines = () => {
   const [editMode, setEditMode] = useState(false)
   const [activities, setActivities] = useState([])
   const [addMode, setAddMode] = useState(false)
+  const [activity, setActivity] = useState('activities')
 
   let token = localStorage.getItem("token");
 
   const getMyInfo = async () => {
     const username = await getUser(token)
-    console.log(username, 'username MyRoutines')
+    // console.log(username, 'username MyRoutines')
     const userData = await getUserRoutines(username.username, token);
     console.log(userData, 'userData')
     setRoutine(userData);
@@ -27,7 +28,8 @@ const MyRoutines = () => {
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
-    createRoutine(event);
+    await createRoutine(event);
+    window.location.reload(true);
   };
 
   const handleEdit = async (event) => {
@@ -36,6 +38,25 @@ const MyRoutines = () => {
     await editRoutine(event, routineId);
     window.location.reload(true);
   };
+
+  useEffect(() => {
+    try{
+        Promise.all([getAllActivities()])
+        .then(([activities]) => {
+            setActivities(activities)
+            console.log(activities, 'activities on addactivity')
+        })
+    } catch(error){
+        throw error
+    }
+}, [])
+
+const handleAdding = async (event) => {
+  event.preventDefault();
+  let routineId = event.target.className
+  await AddActivityToRoutine(event, routineId);
+  // window.location.reload(true);
+};
 
   return (
     <div>
@@ -58,7 +79,7 @@ const MyRoutines = () => {
               id="new-routine-submit"
               type="Submit"
               onClick={() => {
-                window.location.reload(true);
+                // window.location.reload(true);
               }}
             >
               Create
@@ -121,13 +142,13 @@ const MyRoutines = () => {
                     <div id='delete-button'>
                     <button
                       id="delete-button"
-                      onClick={() => {
+                      onClick={async() => {
                         const token = localStorage.getItem("token");
-                        deleteRoutine(token, routine.id);
+                        await deleteRoutine(token, routine.id);
                         window.location.reload(true)
                       }}
                     >
-                      Delete Post
+                      Delete Routine
                     </button>
                   </div>
                   <div id='add-activity-button'>
@@ -139,7 +160,39 @@ const MyRoutines = () => {
                       }}>
                         Add Activity</button>
                         {addMode ? 
-                        (<AddActivities activities = {activities} setActivities = {setActivities}/>) 
+                        (<div>
+                          <fieldset>
+                            <select 
+                            name="Activity"
+                            // id="select-activity"
+                            value={activity} 
+                            onChange={(event)=>{
+
+                            console.log(event, "I AM THE SET ACTIVITY EVENT")
+                            setActivity(event.target.value)
+                            
+                            }}>
+                            <option value="any">Choose Activity...</option>
+                         
+                            {activities.map((activity, idx) =>
+                            <option value = {activity.id} key={idx}>{activity.name}</option>
+                            )}
+
+                            </select>
+                            
+                            {activity === (activity !== 'any' && activity) && 
+                              <div>
+                                  <form className={`${routine.id}`} id={`${activity}`} onSubmit={handleAdding}>
+                                  <input id="count" placeholder="Count" />
+                                  <input id="duration" placeholder="Duration" />
+                                  <button type="Submit" onClick={() => {
+                                    
+                                  // window.location.reload(true);
+                                }}>Add to Routine</button>
+                                </form>
+                              </div>}
+                            </fieldset>
+                        </div>) 
                             : null}
                         </div>
                     </div>
