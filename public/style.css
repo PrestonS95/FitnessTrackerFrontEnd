@@ -58,7 +58,8 @@
 
 #edit-button,
 #delete-button,
-#add-activity-button {
+#add-activity-button,
+#edit-activity-button {
     display: flex;
     flex-direction: row-reverse;
 }

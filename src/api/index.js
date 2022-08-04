@@ -199,3 +199,49 @@ export async function AddActivityToRoutine(event, routineId){
     throw error
   }
 }
+export const editRoutineActivity = async(event, routineActivityId) => {
+try{
+     const token = localStorage.getItem("token");
+     const newRoutineCount = event.target[0].value;
+     console.log(newRoutineCount, "newRoutineCount")
+     const newRoutineDuration = event.target[1].value;
+     console.log(newRoutineDuration, "newRoutineDuration")
+     const response = await fetch(`${URL}/routine_activities/${routineActivityId}`, {
+      method: "PATCH",
+      headers: {
+          'Content-Type': 'application/json',
+         'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        count: `${newRoutineCount}`,
+        duration: `${newRoutineDuration}`,
+        }),
+ })
+  console.log(response, 'response')
+  const result = await response.json()
+  console.log(result, 'result ')
+  return result
+  }
+  catch(error){
+  throw(error)
+}
+}
+export const deleteRoutineActivity = async(token, routineActivityId) => {
+try{
+     const token = localStorage.getItem("token");
+     const response = await fetch(`${URL}/routine_activities/${routineActivityId}`, {
+      method: "DELETE",
+      headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+      },
+ })
+  console.log(response, 'response')
+  const result = await response.json()
+  console.log(result, 'result ')
+  return result
+  }
+  catch(error){
+  throw(error)
+}
+}

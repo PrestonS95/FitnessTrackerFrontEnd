@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import AddActivities from "./AddActivities";
-import { getUser, getUserRoutines, createRoutine, deleteRoutine, editRoutine, AddActivityToRoutine, getAllActivities } from "../api";
+// import AddActivities from "./AddActivities";
+import { getUser, getUserRoutines, createRoutine, deleteRoutine, editRoutine, AddActivityToRoutine, getAllActivities, editRoutineActivity, deleteRoutineActivity } from "../api";
 
 const MyRoutines = () => {
   const [routine, setRoutine] = useState([]);
@@ -9,7 +9,10 @@ const MyRoutines = () => {
   const [activities, setActivities] = useState([])
   const [addMode, setAddMode] = useState(false)
   const [activity, setActivity] = useState('activities')
+  const [editActivityMode, setEditActivityMode] = useState(false)
 
+ 
+ 
   let token = localStorage.getItem("token");
 
   const getMyInfo = async () => {
@@ -36,6 +39,13 @@ const MyRoutines = () => {
     event.preventDefault();
     let routineId = event.target.id
     await editRoutine(event, routineId);
+    window.location.reload(true);
+  };
+   const handleEditActivity = async (event) => {
+    event.preventDefault();
+    let routineActivityId = event.target.id
+    console.log(routineActivityId)
+    await editRoutineActivity(event, routineActivityId);
     window.location.reload(true);
   };
 
@@ -189,7 +199,40 @@ const handleAdding = async (event) => {
                                 <p>description: {activity.description}</p>
                                 <p>count: {activity.count}</p>
                                 <p>duration: {activity.duration}</p>
-                            </div>
+                                <div>
+                                  <button id="edit-activity-button" type="button"
+                                  onClick={() => {
+                                  setEditActivityMode(true)
+                                  }}>Edit Activity
+                                  </button>
+                                  {editActivityMode ? 
+                                    (<form id={activity.routineActivityId} onSubmit={handleEditActivity} className="editRoutineForm">
+                                          <input id="count" placeholder={`Count: ${activity.count}`} />
+                                          <input id="duration" placeholder={`Duration: ${activity.duration}`}/>
+                                          <button
+                                            id="edit-routine_activities-submit"
+                                            type="Submit"
+                                            onClick={() => {
+                                              // window.location.reload(true);
+                                            }}
+                                          >
+                                            Update Activity
+                                          </button>
+                                        </form>) 
+                                        : null}
+                                    </div>
+                                      <div id='delete-routine_activity-button'>
+                                          <button
+                                            id="delete-routine_activities-button"
+                                            onClick={async(e) => {
+                                              const token = localStorage.getItem("token");
+                                              await deleteRoutineActivity(token, activity.routineActivityId)
+                                              console.log(e)
+                                              window.location.reload(true)
+                                            }}
+                                          >Delete Routine</button>
+                                    </div>
+                                </div>
                         )
                     })}
                     </div>
