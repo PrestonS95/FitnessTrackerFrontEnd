@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { getAllActivities } from "../api";
+import { createActivity, getAllActivities } from "../api";
 
 
 const Activities = () =>{
@@ -13,9 +13,35 @@ const Activities = () =>{
     useEffect(() => {
         getActivities() 
     }, [])
+    const handleSubmit = async (event) => {
+    event.preventDefault();
+    await createActivity(event);
+    window.location.reload(true);
+  };
     
     return(
+       
         <div>
+        <>
+        {localStorage.getItem("token") ? 
+            <div>
+                <h3 id="create-activity-title">Create New Activity</h3>
+                <form onSubmit={handleSubmit} className="activityForm">
+                    <input id="name" placeholder="Name" />
+                    <input id="description" placeholder="Description" />
+                    <button
+                    id="new-routine-submit"
+                    type="Submit" 
+                    onClick={() => {
+                        // window.location.reload(true);
+                    }}
+                    >
+                    Create
+                    </button>
+                </form>
+            </div>
+            : null }
+            </>
             {activity.map((activity, index) => {
                 return (
                     <div className="activities" key={index}>

@@ -98,6 +98,33 @@ export async function getPublicRoutine() {
         throw(error)
     }
 }
+export async function createActivity(event){
+  const token = localStorage.getItem('token')
+  const newActivityName = event.target[0].value
+  const newActivityDescription = event.target[1].value
+  console.log(newActivityName, newActivityDescription, 'newActivity api')
+  try{
+     const response = await fetch(`${URL}/activities`,
+  {
+      method: "POST",
+      headers: {
+          'Content-Type': 'application/json',
+         'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        name: `${newActivityName}`,
+        description: `${newActivityDescription}`,
+        }),
+ })
+  const result = await response.json()
+  console.log(result, 'result ')
+  return result
+  }
+  catch(error){alert({...error})
+  alert(error)
+  
+  }
+}
 
 export async function registerPerson(event){
   const registerUsername = event.target[0].value

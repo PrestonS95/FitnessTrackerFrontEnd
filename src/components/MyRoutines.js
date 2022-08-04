@@ -11,7 +11,8 @@ const MyRoutines = () => {
   const [activity, setActivity] = useState('activities')
   const [editActivityMode, setEditActivityMode] = useState(false)
 
- 
+  const [name, setName] = useState("")
+  const [goal, setGoal] = useState("")
  
   let token = localStorage.getItem("token");
 
@@ -35,12 +36,14 @@ const MyRoutines = () => {
     window.location.reload(true);
   };
 
+  
   const handleEdit = async (event) => {
     event.preventDefault();
     let routineId = event.target.id
     await editRoutine(event, routineId);
-    window.location.reload(true);
+    // window.location.reload(true);
   };
+
    const handleEditActivity = async (event) => {
     event.preventDefault();
     let routineActivityId = event.target.id
@@ -109,10 +112,10 @@ const handleAdding = async (event) => {
                         setEditMode(true)
                       }}>
                         Edit Routine</button>
-                        {editMode ? 
+                        {editMode && (`${routine.id}` === index) ? 
                         (<form id={`${routine.id}`} onSubmit={handleEdit} className="editRoutineForm">
-                              <input id="name" placeholder="Name" />
-                              <input id="goal" placeholder="Goal" />
+                              <input id="name" placeholder={`Name: ${routine.name}`} defaultValue={routine.name}/>
+                              <input id="goal" placeholder={`Goal: ${routine.goal}`} defaultValue={routine.goal}/>
                               <label>
                                 Public?
                                 <input
@@ -207,8 +210,9 @@ const handleAdding = async (event) => {
                                   </button>
                                   {editActivityMode ? 
                                     (<form id={activity.routineActivityId} onSubmit={handleEditActivity} className="editRoutineForm">
-                                          <input id="count" placeholder={`Count: ${activity.count}`} />
-                                          <input id="duration" placeholder={`Duration: ${activity.duration}`}/>
+                                          <input id="count" placeholder={`Count: ${activity.count}`} defaultValue={activity.count}/>
+                                          
+                                          <input id="duration" placeholder={`Duration: ${activity.duration}`} defaultValue={activity.duration}/>
                                           <button
                                             id="edit-routine_activities-submit"
                                             type="Submit"
