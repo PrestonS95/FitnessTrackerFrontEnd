@@ -16,7 +16,7 @@ const Routines = () => {
     
    
     return(
-        <div>
+        <div className="all-routines">
             {routine.map((routine, index) => {
                 return (
                     <div className="routines" key={index}>
@@ -26,7 +26,7 @@ const Routines = () => {
                         <p>activities</p>
                         {routine.activities.map((activity, index) => {
                             return (
-                                <div key={index}>
+                                <div className="routine-activities" key={index}>
                                     <p>name: {activity.name}</p>
                                     <p>description: {activity.description}</p>
                                     <p>count: {activity.count}</p>

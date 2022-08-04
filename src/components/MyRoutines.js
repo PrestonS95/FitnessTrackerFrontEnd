@@ -55,7 +55,7 @@ const handleAdding = async (event) => {
   event.preventDefault();
   let routineId = event.target.className
   await AddActivityToRoutine(event, routineId);
-  // window.location.reload(true);
+  window.location.reload(true);
 };
 
   return (
@@ -86,28 +86,14 @@ const handleAdding = async (event) => {
             </button>
           </form>
         </div>
-        <div>
+        <div className="all-routines">
         {routine.map((routine, index) => {
           console.log(routine, 'routine in myRoutines')
             return (
                 <div className="routines" key={index}>
-                    <p>name: {routine.name}</p>
-                    <p>goal: {routine.goal}</p>
-                    <p>creator: {routine.creatorName}</p>
-                    <p>activities</p>
-                    {routine.activities.map((activity, index) => {
-                        return (
-                            <div key={index}>
-                                <p>name: {activity.name}</p>
-                                <p>description: {activity.description}</p>
-                                <p>count: {activity.count}</p>
-                                <p>duration: {activity.duration}</p>
-                            </div>
-                        )
-                    })}
-                  <div id='edit-button'>
-                     <button
-                      id="edit-routine-submit"
+                    <div id='edit-button'>
+                    <button
+                      id="edit-routine-button"
                       type="button"
                       onClick={() => {
                         setEditMode(true)
@@ -141,7 +127,7 @@ const handleAdding = async (event) => {
                         </div>
                     <div id='delete-button'>
                     <button
-                      id="delete-button"
+                      id="delete-routine-button"
                       onClick={async() => {
                         const token = localStorage.getItem("token");
                         await deleteRoutine(token, routine.id);
@@ -177,7 +163,6 @@ const handleAdding = async (event) => {
                             {activities.map((activity, idx) =>
                             <option value = {activity.id} key={idx}>{activity.name}</option>
                             )}
-
                             </select>
                             
                             {activity === (activity !== 'any' && activity) && 
@@ -186,8 +171,6 @@ const handleAdding = async (event) => {
                                   <input id="count" placeholder="Count" />
                                   <input id="duration" placeholder="Duration" />
                                   <button type="Submit" onClick={() => {
-                                    
-                                  // window.location.reload(true);
                                 }}>Add to Routine</button>
                                 </form>
                               </div>}
@@ -195,6 +178,20 @@ const handleAdding = async (event) => {
                         </div>) 
                             : null}
                         </div>
+                    <p>name: {routine.name}</p>
+                    <p>goal: {routine.goal}</p>
+                    <p>creator: {routine.creatorName}</p>
+                    <p>activities</p>
+                     {routine.activities.map((activity, index) => {
+                        return (
+                            <div className="routine-activities" key={index}>
+                                <p>name: {activity.name}</p>
+                                <p>description: {activity.description}</p>
+                                <p>count: {activity.count}</p>
+                                <p>duration: {activity.duration}</p>
+                            </div>
+                        )
+                    })}
                     </div>
             )
         })}

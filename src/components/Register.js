@@ -7,7 +7,7 @@ const userRegister = () => {
     registerPerson(event);
   }
   return (
-    <div>
+    <div className="register-form">
       <h2 className="form-title">Register</h2>
       <form className="register-box" onSubmit={handleSubmit}>
         <label>Username:</label>

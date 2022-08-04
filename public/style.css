@@ -3,7 +3,68 @@
 
 }
 
-.routines,
-.activities {
-    border: solid black 2px;
+.title {
+    text-align: center;
 }
+
+.nav-links {
+    display:flex;
+    justify-content: space-evenly;
+    align-content: center;
+    align-self: center;
+}
+
+.home-link,
+.routines-link,
+.myroutines-link,
+.activites-link,
+.login-register-link {
+    padding: 10px;
+    margin: 5px;
+    text-decoration: none;
+    border-radius: 10px;
+    color: black;
+}
+
+#logout-button{
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+    border: none;
+}
+
+.all-routines{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.routines,
+.activities{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    border: solid black 2px;
+    padding: 5px;
+    margin: 10px;
+}
+
+.routine-activities{
+    display: flex;
+    flex-direction: column;
+    border: solid black 2px;
+    margin: 10px;
+}
+
+#edit-button,
+#delete-button,
+#add-activity-button {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.login-form,
+.register-form{
+    text-align: center;
+}
+
