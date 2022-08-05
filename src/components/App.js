@@ -1,6 +1,6 @@
 import { Routes, Route,} from "react-router-dom";
 import React, {useState, useEffect} from 'react';
-import {Activities, Navbar, Routines, Login, Register, MyRoutines} from "./";
+import {Activities, Navbar, Routines, Login, Register, MyRoutines, HomePage} from "./";
 
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
     <>
     <Navbar />
       <Routes>
-        <Route path="/" />
+        <Route path="/" element={<HomePage/>} />
         <Route path="/activities" element={<Activities/>} />
         <Route path="/routines" element={<Routines/>} />
         <Route path="/my-routines" element={<MyRoutines/>} />

@@ -10,10 +10,8 @@ const MyRoutines = () => {
   const [addMode, setAddMode] = useState(false)
   const [activity, setActivity] = useState('activities')
   const [editActivityMode, setEditActivityMode] = useState(false)
+  const [createNew, setCreateNew] = useState(false)
 
-  const [name, setName] = useState("")
-  const [goal, setGoal] = useState("")
- 
   let token = localStorage.getItem("token");
 
   const getMyInfo = async () => {
@@ -30,24 +28,23 @@ const MyRoutines = () => {
   const handleChange = () => {
     setChecked(!checked);
   };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     await createRoutine(event);
     window.location.reload(true);
   };
 
-  
   const handleEdit = async (event) => {
     event.preventDefault();
     let routineId = event.target.id
     await editRoutine(event, routineId);
-    // window.location.reload(true);
+    window.location.reload(true);
   };
 
    const handleEditActivity = async (event) => {
     event.preventDefault();
     let routineActivityId = event.target.id
-    console.log(routineActivityId)
     await editRoutineActivity(event, routineActivityId);
     window.location.reload(true);
   };
@@ -73,12 +70,18 @@ const handleAdding = async (event) => {
 
   return (
     <div>
-        <div>
-        <h3 id="create-routine-title">Create New Routine</h3>
-          <form onSubmit={handleSubmit} className="routineForm">
-            <input id="name" placeholder="Name" />
-            <input id="goal" placeholder="Goal" />
-            <label>
+        <div id="new-routine-form-button">
+          <button 
+            id="create-new-routine-button"
+            onClick={()=>{
+            setCreateNew(true)}}>
+            <span class="material-icons">post_add</span>
+            Create New Routine
+          </button>
+          { createNew ?  <form onSubmit={handleSubmit} className="routineForm">
+            <input className="create-name" id="name" placeholder="Name" />
+            <input className="create-goal" id="goal" placeholder="Goal" />
+            {/* <label>
               Public?
               <input
                 id="deliver"
@@ -87,7 +90,7 @@ const handleAdding = async (event) => {
                 onChange={handleChange}
                 placeholder="Public"
               />
-            </label>
+            </label> */}
             <button
               id="new-routine-submit"
               type="Submit"
@@ -95,24 +98,48 @@ const handleAdding = async (event) => {
                 // window.location.reload(true);
               }}
             >
-              Create
+              Post
             </button>
-          </form>
+          </form> : null}
+          <button 
+            id="public-routines-button"
+            onClick={async ()=>{
+          }}>
+            <span class="material-icons">public</span>
+            My Public Routines
+          </button>
+          <button 
+            id="private-routines-button"
+            onClick={()=>{
+            }}>
+            <span class="material-icons">lock</span>
+            My Private Routines
+          </button>
         </div>
         <div className="all-routines">
-        {routine.map((routine, index) => {
+        {routine.map((routine, routineId) => {
           console.log(routine, 'routine in myRoutines')
             return (
-                <div className="routines" key={index}>
+                <div className="routines" key={routineId}>
+                  <div id='buttons-div'>
                     <div id='edit-button'>
                     <button
                       id="edit-routine-button"
                       type="button"
-                      onClick={() => {
+                      className = {routine.id}
+                      onClick={(event) => {
+                        console.log(event, 'hi')
                         setEditMode(true)
+                        
                       }}>
-                        Edit Routine</button>
-                        {editMode && (`${routine.id}` === index) ? 
+                        <span class="material-icons">edit</span>
+                        </button>
+                        {console.log(event, 'event')}
+                        {/* {console.log(index, 'routine index')} */}
+                        {console.log(routine.id, 'routine id')}
+                        
+
+                        {editMode && routine.id  ? 
                         (<form id={`${routine.id}`} onSubmit={handleEdit} className="editRoutineForm">
                               <input id="name" placeholder={`Name: ${routine.name}`} defaultValue={routine.name}/>
                               <input id="goal" placeholder={`Goal: ${routine.goal}`} defaultValue={routine.goal}/>
@@ -147,7 +174,7 @@ const handleAdding = async (event) => {
                         window.location.reload(true)
                       }}
                     >
-                      Delete Routine
+                      <span class="material-icons">delete</span>
                     </button>
                   </div>
                   <div id='add-activity-button'>
@@ -157,10 +184,11 @@ const handleAdding = async (event) => {
                       onClick={() => {
                         setAddMode(true)
                       }}>
-                        Add Activity</button>
+                        <span class="material-icons">add</span>
+                        </button>
                         {addMode ? 
-                        (<div>
-                          <fieldset>
+                        (<div id='add-activity-form'>
+                          <fieldset id="add-activity-fieldset">
                             <select 
                             name="Activity"
                             // id="select-activity"
@@ -179,11 +207,11 @@ const handleAdding = async (event) => {
                             </select>
                             
                             {activity === (activity !== 'any' && activity) && 
-                              <div>
+                              <div id='add-rouitneactivity-form'>
                                   <form className={`${routine.id}`} id={`${activity}`} onSubmit={handleAdding}>
                                   <input id="count" placeholder="Count" />
                                   <input id="duration" placeholder="Duration" />
-                                  <button type="Submit" onClick={() => {
+                                  <button id="add-button" type="Submit" onClick={() => {
                                 }}>Add to Routine</button>
                                 </form>
                               </div>}
@@ -191,25 +219,28 @@ const handleAdding = async (event) => {
                         </div>) 
                             : null}
                         </div>
-                    <p>name: {routine.name}</p>
-                    <p>goal: {routine.goal}</p>
-                    <p>creator: {routine.creatorName}</p>
-                    <p>activities</p>
+                        </div>
+                    <p className="routine-name">{routine.name}</p>
+                    <p className="routine-goal">Goal: {routine.goal}</p>
+                    {/* <p className="routine-activity">Activities</p> */}
                      {routine.activities.map((activity, index) => {
                         return (
                             <div className="routine-activities" key={index}>
-                                <p>name: {activity.name}</p>
-                                <p>description: {activity.description}</p>
-                                <p>count: {activity.count}</p>
-                                <p>duration: {activity.duration}</p>
-                                <div>
+                              <div id="activities-on-routines">
+                                <p className="activity-name">{activity.name}</p>
+                                <p className="activity-description">description: {activity.description}</p>
+                                <p className="activity-count">count: {activity.count}</p>
+                                <p className="activity-duration">duration: {activity.duration}</p>
+                                </div>
+                                <div id="activity-buttons-div">
+                                  <div>
                                   <button id="edit-activity-button" type="button"
                                   onClick={() => {
                                   setEditActivityMode(true)
-                                  }}>Edit Activity
+                                  }}><span class="material-icons">edit</span>
                                   </button>
                                   {editActivityMode ? 
-                                    (<form id={activity.routineActivityId} onSubmit={handleEditActivity} className="editRoutineForm">
+                                    (<form id={activity.routineActivityId} onSubmit={handleEditActivity} className="editRoutineActivityForm">
                                           <input id="count" placeholder={`Count: ${activity.count}`} defaultValue={activity.count}/>
                                           
                                           <input id="duration" placeholder={`Duration: ${activity.duration}`} defaultValue={activity.duration}/>
@@ -234,7 +265,8 @@ const handleAdding = async (event) => {
                                               console.log(e)
                                               window.location.reload(true)
                                             }}
-                                          >Delete Routine</button>
+                                          ><span class="material-icons">clear</span></button>
+                                    </div>
                                     </div>
                                 </div>
                         )

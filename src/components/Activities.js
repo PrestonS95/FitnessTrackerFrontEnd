@@ -4,6 +4,7 @@ import { createActivity, getAllActivities } from "../api";
 
 const Activities = () =>{
     const [activity, setActivity] = useState([])
+    const [createNew, setCreateNew] = useState(false)
    
        const getActivities = async() => {
         const activity = await getAllActivities()
@@ -24,11 +25,17 @@ const Activities = () =>{
         <div>
         <>
         {localStorage.getItem("token") ? 
-            <div>
-                <h3 id="create-activity-title">Create New Activity</h3>
-                <form onSubmit={handleSubmit} className="activityForm">
-                    <input id="name" placeholder="Name" />
-                    <input id="description" placeholder="Description" />
+            <div className="create-new-activity">
+                <button 
+                    id="create-new-activity-button"
+                    onClick={()=>{
+                    setCreateNew(true)}}>
+                    <span class="material-icons">post_add</span>
+                    Create New Activity
+                </button>
+                {createNew ? <form onSubmit={handleSubmit} className="activityForm">
+                    <input id="create-name" placeholder="Name" />
+                    <input id="create-description" placeholder="Description" />
                     <button
                     id="new-routine-submit"
                     type="Submit" 
@@ -38,10 +45,11 @@ const Activities = () =>{
                     >
                     Create
                     </button>
-                </form>
+                </form> : null}
             </div>
             : null }
             </>
+            <div className="all-activities">
             {activity.map((activity, index) => {
                 return (
                     <div className="activities" key={index}>
@@ -50,6 +58,7 @@ const Activities = () =>{
                     </div>
                 )
             })}
+            </div>
        </div>
 )}
 
