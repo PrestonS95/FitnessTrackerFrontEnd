@@ -7,8 +7,8 @@ const userRegister = () => {
     registerPerson(event);
   }
   return (
-    <div>
-      <h2 className="form-title">Register</h2>
+    <div className="register-form">
+      <h2 className="form-title">Sign Up</h2>
       <form className="register-box" onSubmit={handleSubmit}>
         <label>Username:</label>
         <input id="username" placeholder="username"></input>

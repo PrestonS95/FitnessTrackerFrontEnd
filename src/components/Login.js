@@ -19,11 +19,11 @@ const Login = () => {
     const token = await loginPerson(username, password);
     console.log(token, 'login component')
     localStorage.setItem("token", token);
-    window.location.reload(true);
+    window.location.assign("/");
   };
 
   return (
-    <div>
+    <div className="login-form">
       <h2 className="form-title">Login</h2>
       <form onSubmit={handleSubmit} className="login-box">
         <label>Username:</label>
