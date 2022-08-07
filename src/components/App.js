@@ -15,7 +15,7 @@ function App() {
         <Route
           path="/login-and-register"
           element={
-            <div>
+            <div className='loginin-register'>
               <Login />
               <Register />
             </div>

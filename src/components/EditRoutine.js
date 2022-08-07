@@ -12,7 +12,7 @@ const EditRoutines = ({ routine }) => {
     event.preventDefault();
     let routineId = event.target.id;
     await editRoutine(event, routineId);
-    // window.location.reload(true);
+    window.location.reload(true);
   };
 
   return (

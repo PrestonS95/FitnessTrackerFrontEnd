@@ -16,13 +16,19 @@ const HomePage = () => {
     }, [])
 
     return (
-        <div>
+        <div className = 'home-page'>
             {token ? 
-            <div>
+            <div className = 'home-page'>
                 <h1 id="home-title">Welcome {user}!</h1>
+                <div className = "home-quote">
+                <p id="home-quote">"You are one workout away from a better mood!"</p>
+                </div>
             </div> : 
-            <div>
-                <h1 id="home-title">Please sign up or login in!</h1>
+            <div className = 'home-page'>
+                <h1 id="home-title">Please login in or sign up!</h1>
+                <div className = "home-quote">
+                <p id="home-quote">"You may not be there yet, but you are closer than you were yesterday"</p>
+                </div>
             </div>}
         </div>
     )

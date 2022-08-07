@@ -156,7 +156,7 @@ const MyRoutines = () => {
                     <div id="activities-on-routines">
                       <p className="activity-name">{activity.name}</p>
                       <p className="activity-description">
-                        description: {activity.description}
+                        {activity.description}
                       </p>
                       <p className="activity-count">count: {activity.count}</p>
                       <p className="activity-duration">

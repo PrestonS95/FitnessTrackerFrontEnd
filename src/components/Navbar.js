@@ -20,7 +20,7 @@ const Navbar = () => {
           Activities
         </NavLink>
         {localStorage.getItem("token") ? <Logout /> : <NavLink to="/login-and-register" className="login-register-link">
-          Login/Register
+          Login/Sign Up
         </NavLink>}
       </div>
     </nav>

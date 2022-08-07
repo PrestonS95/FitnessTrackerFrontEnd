@@ -56,7 +56,7 @@ const Activities = () => {
           return (
             <div className="activities" key={index}>
               <p id="activity-name">{activity.name}</p>
-              <p id="activity-description">description: {activity.description}</p>
+              <p id="activity-description">{activity.description}</p>
             </div>
           );
         })}
