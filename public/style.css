@@ -3,16 +3,19 @@
 }
 
 body {
-    background-color: white;
+    background-color: #CFE8F4;
 }
 
 /* NAVBAR */
 nav {
     padding-top: 5px;
+    background-color: #023047;
 }
 
 .title {
     text-align: center;
+    color: #FCA949;
+    font-family: 'Bungee', cursive;
 }
 
 .nav-links {
@@ -30,8 +33,9 @@ nav {
     padding: 10px;
     margin: 5px;
     text-decoration: none;
-    border-radius: 10px;
-    color: black;
+    border-radius: 10px;;
+    color: white;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
 }
 
 #logout-button{
@@ -39,14 +43,16 @@ nav {
     margin: 5px;
     border-radius: 10px;
     border: none;
+    background-color: #CFE8F4;
 }
 
 #logout-button:hover{
-    background-color: rgb(190, 190, 190);
+    background-color: #219EBC;
 }
 
 .active{
-    color: red;
+    /* background-color: #219EBC; */
+    color: #219EBC;
 }
 
 /* LOGIN/REGISTER */
@@ -75,8 +81,7 @@ nav {
 }
 
 /* ROUTINES AND ACTIVITIES */
-.all-routines,
-.all-activities{
+.all-routines{
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -85,22 +90,36 @@ nav {
     margin-right: 10px;
 }
 
+.all-activities {
+    display: flex;
+    /* flex-direction: row; */
+    flex-wrap: wrap;
+    padding: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    align-items: stretch;
+    justify-content: center;
+}
+
 .routines{
     display: flex;
     flex-direction: column;
     border-radius: 10px;
-    border: 2px solid black;
+    /* border: 2px solid black; */
     padding: 5px;
     margin: 10px;
+    background-color: #78BDD9;
+    box-shadow: 5px 5px 5px #023047;
 }
 
 .routine-activities{
     display: flex;
     flex-direction: column; 
-    border: 2px solid black;
+    /* border: 2px solid black; */
     border-radius: 10px;
     margin: 10px;
     padding: 5px;
+    background-color: #9ED2EA;
 }
 
 #activities-on-routines{
@@ -111,10 +130,20 @@ nav {
 .activities {
     display: flex;
     flex-direction: column;
+    flex: 1 auto;
+    justify-content: space-evenly;
     padding: 10px;
     margin: 10px;
     border-radius: 10px;
-    border: 2px solid black;
+    background-color: #9ED2EA;
+    width: 20vw;
+    height: 18vh;
+    box-shadow: 5px 5px 5px #023047
+}
+
+#activity-name{
+    text-align: center;
+    font-weight: bold;
 }
 
 #buttons-div {
@@ -137,13 +166,13 @@ nav {
 #delete-routine-button,
 #add-activity-submit {
     border: none;
-    background-color: white;
+    background-color: #78BDD9;
 }
 
 #edit-activity-button,
 #delete-routine_activities-button {
     border: none;
-    background-color: white;
+    background-color: #9ED2EA;
 }
 
 #edit-routine-button:hover,
@@ -151,22 +180,34 @@ nav {
 #add-activity-submit:hover,
 #edit-activity-button:hover,
 #delete-routine_activities-button:hover {
-    color: blue;
+    color: #fb8500;
 }
 
 .editRoutineForm {
     display: flex;
-    border: 2px solid black;
-    border-radius: 10px;
+    border-radius: 5px;
     flex-direction: column;
     align-items: center;
     padding: 5px;
+    background-color: #126782;
+    color: white;
+}
+
+.editRoutineForm > input,
+#add-rouitneactivity-form > input,
+.editRoutineActivityForm > input,
+#count,
+#duration {
+    border: none;
+    border-radius: 5px;
+    padding: 2px;
+    margin: 3px;
 }
 
 #add-activity-fieldset {
     display: flex;
     flex-direction: column;
-    border: 2px solid black;
+    border: none;
     border-radius: 10px;
 }
 
@@ -179,15 +220,16 @@ nav {
 .editRoutineActivityForm {
     display: flex;
     align-items: center;
-    border: 2px solid black;
     border-radius: 10px;
     padding: 5px;
+    background-color: #126782;
 }
 
 #new-routine-form-button {
     float: left;
     justify-content: center;
     margin: 1vh;
+    color: white;
 }
 
 #create-new-routine-button,
@@ -203,27 +245,32 @@ nav {
     border-radius: 5px;
     text-align: center;
     font-size: 1em;
+    background-color: #FCA949;
+    font-family: 'Staatliches', cursive;
 }
 
 #create-new-routine-button:hover,
 #public-routines-button:hover,
 #private-routines-button:hover,
 #create-new-activity-button:hover {
-    background-color: rgb(190, 190, 190);
+    background-color: #fb8500;
 }
 
 #public-routines-button{
     padding-right: 14px;
 }
 
-.routineForm {
+.routineForm,
+.public-routines,
+.private-routines {
     display: flex;
     flex-direction: column;
     align-items: center;
     border-radius: 10px;
     padding: 20px;
     margin-left: 10px;
-    border: 2px solid black;
+    /* border: 2px solid black; */
+    background-color: #023047;
 }
 
 .create-new-activity{
@@ -235,12 +282,13 @@ nav {
 .activityForm {
     display: flex;
     flex-direction: column;
-    border: 2px solid black;
+    /* border: 2px solid black; */
     border-radius: 10px;
     padding: 20px;
     margin-left: 10px;
     width: 40%;
     align-items: center;
+    background-color: #126782;
 }
 
 #create-name,
@@ -258,11 +306,13 @@ nav {
     display: flex;
     padding: 5px;
     border-radius: 5px;
+    background-color: #126782;
 }
 
 #new-routine-submit,
 #edit-routine-submit,
-#add-button {
+#add-button,
+#edit-routine_activities-submit {
     border: none;
     border-radius:5px;
     padding: 5px;
@@ -279,3 +329,6 @@ nav {
     padding: 5px;
 }
 
+.checkbox{
+    display: flex;
+}
