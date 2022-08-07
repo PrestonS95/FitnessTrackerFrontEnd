@@ -60,7 +60,7 @@ const MyRoutines = () => {
             <input className="create-name" id="name" placeholder="Name" />
             <input className="create-goal" id="goal" placeholder="Goal" />
             <label>
-              Public?
+              Make Public
               <input
                 id="deliver"
                 type="checkbox"

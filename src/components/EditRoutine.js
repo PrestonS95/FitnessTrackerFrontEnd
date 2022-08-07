@@ -33,6 +33,7 @@ const EditRoutines = ({ routine }) => {
           defaultValue={routine.goal}
         />
         <div className = "checkbox">
+          <div className="edit-routine-checkbox">
           <input
             id="public-or-private"
             type="checkbox"
@@ -41,7 +42,12 @@ const EditRoutines = ({ routine }) => {
             placeholder="Public"
           />
           {/* {routine.isPublic ? <div><p>(leave unchecked for private)</p></div> : <div><p>(click make routine public)</p></div>} */}
-          {checked ? <div><p>Public</p></div> : <div><p>Private</p></div>}
+          {checked ? <div id="public-or-private"><p>private</p></div> : <div id="public-or-private"><p>public</p></div>}
+          </div>
+          <div>
+          {routine.isPublic ? <div>currently: public</div> : <div>currently: private</div>}
+          </div>
+          
         </div>
         <button
           id="edit-routine-submit"

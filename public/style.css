@@ -6,8 +6,13 @@ body {
     background-color: #CFE8F4;
 }
 
-footer {
+footer{
     background-color: #023047;
+    padding-bottom: 5px; 
+    height: 6vh;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
 }
 
 /* NAVBAR */
@@ -55,8 +60,6 @@ nav {
 }
 
 .active{
-    /* background-color: #219EBC; */
-    /* color: #219EBC; */
     color: #FB8500;
 }
 
@@ -69,10 +72,8 @@ nav {
 .login-form,
 .register-form{
     display: flex;
-    /* flex-direction: column; */
     text-align: center;
     border-radius: 10px;
-    /* border: 2px solid black; */
     padding: 10px;
     margin: 30px;
     max-width: 40vw;
@@ -120,6 +121,8 @@ nav {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #73BFDC;
+    height: 90vh;
 }
 
 #home-title {
@@ -137,6 +140,7 @@ nav {
     display: flex;
     align-items: flex-end;
     font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 20px;
 }
 
 /* ROUTINES AND ACTIVITIES */
@@ -147,11 +151,11 @@ nav {
     padding: 10px;
     margin-left: 10px;
     margin-right: 10px;
+    margin-bottom: 6vh;
     font-family: 'Mandali', sans-serif;}
 
 .all-activities {
     display: flex;
-    /* flex-direction: row; */
     flex-wrap: wrap;
     padding: 10px;
     margin-left: 10px;
@@ -188,7 +192,6 @@ nav {
 .routine-activities{
     display: flex;
     flex-direction: column; 
-    /* border: 2px solid black; */
     border-radius: 10px;
     margin: 10px;
     padding: 5px;
@@ -356,7 +359,6 @@ nav {
     border-radius: 10px;
     padding: 20px;
     margin-left: 10px;
-    /* border: 2px solid black; */
     background-color: #126782;
 }
 
@@ -369,7 +371,6 @@ nav {
 .activityForm {
     display: flex;
     flex-direction: column;
-    /* border: 2px solid black; */
     border-radius: 10px;
     padding: 20px;
     margin-left: 10px;
@@ -431,4 +432,28 @@ nav {
 
 .checkbox{
     display: flex;
+    flex-direction: column-reverse;
+}
+
+#public-or-private {
+    display: flex;
+    justify-content: space-evenly;
+    margin-left: 5px;
+}
+
+.edit-routine-checkbox{
+    display: flex;
+    justify-content: center;
+}
+
+#scroll-button {
+    margin-top: 0;
+    margin-bottom: 7vh;
+    background-color: #CFE8F4;
+    border: none;
+}
+
+#scroll-button:hover {
+    background-color: #FB8500;
+    border-radius: 50%;
 }

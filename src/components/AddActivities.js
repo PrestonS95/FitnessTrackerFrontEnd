@@ -31,7 +31,7 @@ const AddActivities = ({ routine }) => {
           // id="select-activity"
           value={activity}
           onChange={(event) => {
-            console.log(event, "I AM THE SET ACTIVITY EVENT");
+            // console.log(event, "I AM THE SET ACTIVITY EVENT")
             setActivity(event.target.value);
           }}
         >

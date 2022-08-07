@@ -1,6 +1,6 @@
 import { Routes, Route,} from "react-router-dom";
 import React, {useState, useEffect} from 'react';
-import {Activities, Navbar, Routines, Login, Register, MyRoutines, HomePage} from "./";
+import {Activities, Navbar, Routines, Login, Register, MyRoutines, HomePage, ScrollButton} from "./";
 
 
 function App() {
@@ -22,6 +22,7 @@ function App() {
           }
         />
       </Routes>
+      <ScrollButton />
     </>
   );
 }
